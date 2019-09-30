@@ -12,8 +12,10 @@ const PokemonsCaptured = ({pokemons}) => {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        overflow: auto;
         height: ${MAX_HEIGHT}px;
         min-width: 50px;
+        ${pokemons.length > 0 && css`background-color: #fff;`}
       `}
     >
       {pokemons.map((p, i) => (

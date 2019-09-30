@@ -41,6 +41,7 @@ const City = ({onCaptured}) => {
           height: ${MAX_HEIGHT}px;
           background-image: url(${cityBg});
           position: relative;
+        border: 5px solid #ccc;
         `}
       >
         {pokemonsInCity.map((p, i) => getPokeminTile(p, i, handlePokemonClick))}
