@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import { css } from 'emotion';
+import City from './components/City';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import PokemonsCaptured from './components/PokemonsCaptured/PokemonsCaptured';
 
 function App() {
+  const [pokemons, setPokemons] = React.useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={css`
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      background: #000;
+      justify-content: center;
+      align-items: center;
+    `}>
+      <City onCaptured={p => setPokemons([...pokemons, p])} />
+      <PokemonsCaptured pokemons={pokemons} />
     </div>
   );
 }

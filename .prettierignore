@@ -1,0 +1,10 @@
+**/*.js
+**/*.tt.html
+**/*.php
+**/*.css
+**/*.scss
+!plugins/naspersclassifieds-regional/*/static/js/src/**/*.js
+!plugins/naspersclassifieds-regional/*/static/js/widgets/**/*.js
+!plugins/naspersclassifieds-regional/verticals-cars-atlas-web/tests/functional/**/*.js
+
+!plugins/naspersclassifieds-regional/*/views/**/*.twig
