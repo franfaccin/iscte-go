@@ -17,15 +17,17 @@ function App() {
       background: #000;
       justify-content: center;
       align-items: center;
+      align-content: center;
       flex-wrap: wrap;
     `}>
       <div className={css`
         width: 100%;
-        height: 50px;
         display: flex;
         justify-content: center;
       `}>
-        <img src={logo} alt="logo"/>
+        <div>
+          <img src={logo} alt="logo"/>
+        </div>
       </div>
       <City onCaptured={p => setPokemons([...pokemons, p])} />
       <PokemonsCaptured pokemons={pokemons} />

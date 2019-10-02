@@ -2,6 +2,7 @@ import React from 'react';
 import PokemonImg from '../PokemonImg';
 import { css } from 'emotion';
 import { MAX_HEIGHT } from '../../config/config';
+import pokeBg from '../../assets/img/pokeballgrid_bg_overlay.png';
 
 const PokemonsCaptured = ({pokemons}) => {
 
@@ -15,6 +16,7 @@ const PokemonsCaptured = ({pokemons}) => {
         overflow: auto;
         height: ${MAX_HEIGHT}px;
         min-width: 50px;
+        background-image: url(${pokeBg});
         ${pokemons.length > 0 && css`background-color: #fff;`}
       `}
     >
@@ -23,9 +25,20 @@ const PokemonsCaptured = ({pokemons}) => {
           className={css`
             max-height: 50px;
             max-width: 50px;
-          `}
+            height: 50px;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;`}
         >
-          <PokemonImg pokemon={p} />
+          <div
+            className={css`
+              max-height: 50px;
+              max-width: 50px;
+            `}
+          >
+            <PokemonImg pokemon={p} />
+          </div>
         </div>
       ))}
     </div>

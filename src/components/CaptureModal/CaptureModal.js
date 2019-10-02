@@ -11,8 +11,8 @@ import pokeball from '../../assets/img/pokeball.png';
 import pokeballSpining from '../../assets/img/pokeball-spining.gif';
 import shinyBackground from '../../assets/img/sparkle.gif';
 
-const THROW_BALL_DURATION = 1; // seconds
-const CAPTURE_WAIT_TIME = 2;   // seconds
+const THROW_BALL_DURATION = .5; // seconds
+const CAPTURE_WAIT_TIME = .5;   // seconds
 const FAIL_MESSAGE_DURATION = 3; // seconds
 
 const CaptureModal = ({pokemon, onLeave}) => {
@@ -77,6 +77,8 @@ const CaptureModal = ({pokemon, onLeave}) => {
           background-size: cover;
           position: relative;
           overflow: hidden;
+          border: 5px solid #6c757d;
+          border-radius: 5px;
         `}
       >
         <div className={css`
