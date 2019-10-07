@@ -1,10 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import pokeball from '../../assets/img/pokeball.png';
-import { THROW_BALL_DURATION, FAIL_MESSAGE_DURATION } from '../../config/config';
+import poke from '../../assets/img/pokeball.png';
+import great from '../../assets/img/pokeball-great.png';
+import ultra from '../../assets/img/pokeball-ultra.png';
+import master from '../../assets/img/pokeball-master.png';
+import { THROW_BALL_DURATION, FAIL_MESSAGE_DURATION, POKEBALL_TYPE } from '../../config/config';
 
-const CapturePokeball = ({throwBall, captured, onThrowBall, showCapturing}) => {
+const getPokeballImg = (type) => {
+  switch(type) {
+    case POKEBALL_TYPE.MASTER:
+      return master;
+    case POKEBALL_TYPE.ULTRA:
+      return ultra;
+    case POKEBALL_TYPE.GREAT:
+      return great;
+    case POKEBALL_TYPE.POKE:
+    default:
+      return poke;
+  }
+}
+
+const CapturePokeball = ({throwBall, captured, onThrowBall, showCapturing, type}) => {
+  const pokeball = getPokeballImg(type);
 
   return (
     <div

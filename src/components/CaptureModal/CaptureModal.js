@@ -10,6 +10,7 @@ import captureBg from '../../assets/img/capture-bg.png';
 import shinyBackground from '../../assets/img/sparkle.gif';
 import CapturePokeball from '../CapturePokeball/CapturePokeball';
 import { CAPTURE_WAIT_TIME, FAIL_MESSAGE_DURATION, THROW_BALL_DURATION } from '../../config/config';
+import { getPokeball } from '../../VAs/pokeballProbability';
 
 
 const CaptureModal = ({pokemon, onLeave}) => {
@@ -17,6 +18,7 @@ const CaptureModal = ({pokemon, onLeave}) => {
   const [throwBall, setThrowBall] = React.useState(false);
   const [showCapturing, setShowCapturing] = React.useState(false);
   const [captured, setCaptured] = React.useState(null);
+  const [pokeballType] = React.useState(getPokeball());
 
   React.useEffect(() => {
     if (throwBall) {
@@ -32,7 +34,7 @@ const CaptureModal = ({pokemon, onLeave}) => {
   React.useEffect(() => {
     if (showCapturing) {
       const capturing = setTimeout(() => {
-        setCaptured(getCaptureResult());
+        setCaptured(getCaptureResult(pokeballType));
         setShowCapturing(false);
         setThrowBall(false);
       }, CAPTURE_WAIT_TIME * 1000);
@@ -40,7 +42,7 @@ const CaptureModal = ({pokemon, onLeave}) => {
         clearTimeout(capturing);
       };
     }
-  }, [showCapturing]);
+  }, [showCapturing, pokeballType]);
 
   React.useEffect(() => {
     if (captured === false) {
@@ -119,6 +121,7 @@ const CaptureModal = ({pokemon, onLeave}) => {
             captured={captured}
             onThrowBall={handleThrowBall}
             showCapturing={showCapturing}
+            type={pokeballType}
           />
           </div>
       </Modal.Body>
