@@ -1,7 +1,14 @@
 const MAX_WIDTH = 768;
 const MAX_HEIGHT = 650;
 
+const THROW_BALL_DURATION = .5; // seconds
+const CAPTURE_WAIT_TIME = .5;   // seconds
+const FAIL_MESSAGE_DURATION = 3; // seconds
+
 export {
   MAX_WIDTH,
-  MAX_HEIGHT
+  MAX_HEIGHT,
+  THROW_BALL_DURATION,
+  CAPTURE_WAIT_TIME,
+  FAIL_MESSAGE_DURATION
 }

@@ -7,13 +7,10 @@ import CaptureResultDisplay from '../CaptureResultDisplay';
 import PokemonImg from '../PokemonImg';
 import { Pokemon } from '../../model/Pokemon';
 import captureBg from '../../assets/img/capture-bg.png';
-import pokeball from '../../assets/img/pokeball.png';
-import pokeballSpining from '../../assets/img/pokeball-spining.gif';
 import shinyBackground from '../../assets/img/sparkle.gif';
+import CapturePokeball from '../CapturePokeball/CapturePokeball';
+import { CAPTURE_WAIT_TIME, FAIL_MESSAGE_DURATION, THROW_BALL_DURATION } from '../../config/config';
 
-const THROW_BALL_DURATION = .5; // seconds
-const CAPTURE_WAIT_TIME = .5;   // seconds
-const FAIL_MESSAGE_DURATION = 3; // seconds
 
 const CaptureModal = ({pokemon, onLeave}) => {
   const [show, setShow] = React.useState(true);
@@ -117,61 +114,13 @@ const CaptureModal = ({pokemon, onLeave}) => {
           { captured !== null && (
             <CaptureResultDisplay captured={captured} FAIL_MESSAGE_DURATION={FAIL_MESSAGE_DURATION} />
           )}
-          <div
-            className={css`
-              position: absolute;
-              bottom: -25%;
-              width: 300px;
-              height: 300px;
-
-              ${!throwBall && !captured && (css`
-                cursor: pointer;
-                animation: bounce .5s infinite alternate;
-              `)}
-
-              ${throwBall && !showCapturing && (css`
-                animation: throw ${THROW_BALL_DURATION}s 1 ease-out normal forwards;
-              `)}
-
-              ${captured === false && (css`
-                animation: throw ${FAIL_MESSAGE_DURATION}s 1 ease-out reverse;
-              `)}
-
-              ${throwBall && showCapturing && (css`
-                animation: shake 1s ease-in-out infinite alternate;
-              `)}
-
-              ${captured && (css`
-                transform: translate(0, -80%) scale(0.5); 
-              `)}
-
-              @keyframes bounce {
-                0% { transform: translateY(0); }
-                100% { transform: translateY(-30px); }
-              }
-              @keyframes throw {
-                0% { transform: translateY(0) scale(1); }
-                70% { transform: translateY(-120%) scale(0.75); }
-                100% { transform: translateY(-80%) scale(0.5); }
-              }
-              @keyframes shake {
-                0% { transform: translate(0, -80%) rotate(0) scale(0.5); }
-                30% { transform: translate(30px, -80%) rotate(20deg) scale(0.5); }
-                60% { transform: translate(-30px, -80%) rotate(-20deg) scale(0.5); }
-                100% { transform: translate(0, -80%) rotate(0) scale(0.5); }
-              }
-            `}
-            onClick={handleThrowBall}
-          >
-            <img 
-              className={css`
-                width: 100%;
-                height: 100%;
-              `} 
-              src={!captured && throwBall && !showCapturing ? pokeballSpining : pokeball} alt='pokeball'
-            />
+          <CapturePokeball
+            throwBall={throwBall}
+            captured={captured}
+            onThrowBall={handleThrowBall}
+            showCapturing={showCapturing}
+          />
           </div>
-        </div>
       </Modal.Body>
     </Modal>
   )
