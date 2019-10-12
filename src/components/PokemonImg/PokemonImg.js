@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import { pokemonList } from '../../config/pokemon-list.json';
+import { pokemonList } from '../../config/pokemon-list.js';
 import { Pokemon } from '../../model/Pokemon.js';
 
 const getPokemonName = num => pokemonList[num];

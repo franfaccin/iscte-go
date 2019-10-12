@@ -1,4 +1,4 @@
-import { pokemonList } from '../config/pokemon-list.json';
+import { pokemonList } from '../config/pokemon-list.js';
 import { Pokemon } from '../model/Pokemon.js';
 import { MAX_HEIGHT, MAX_WIDTH } from '../config/config.js';
 
