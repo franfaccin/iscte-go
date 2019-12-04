@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import Modal from 'react-bootstrap/Modal';
-import { getCaptureResult } from '../../VAs/captureProbability';
 import CaptureResultDisplay from '../CaptureResultDisplay';
 import PokemonImg from '../PokemonImg';
 import { Pokemon } from '../../model/Pokemon';
 import captureBg from '../../assets/img/capture-bg.png';
 import shinyBackground from '../../assets/img/sparkle.gif';
 import CapturePokeball from '../CapturePokeball/CapturePokeball';
-import { CAPTURE_WAIT_TIME, FAIL_MESSAGE_DURATION, THROW_BALL_DURATION } from '../../config/config';
-import { getPokeball } from '../../VAs/pokeballProbability';
-
+import { CAPTURE_WAIT_TIME, FAIL_MESSAGE_DURATION, THROW_BALL_DURATION, POKEBALL_CATCH_RATE } from '../../config/config';
+import { getPokeball } from '../../VAs/02-histograma-pokeball';
+import { getCatchRate } from '../../VAs/03-catch-rate';
 
 const CaptureModal = ({pokemon, onLeave}) => {
-  const [show, setShow] = React.useState(true);
-  const [throwBall, setThrowBall] = React.useState(false);
-  const [showCapturing, setShowCapturing] = React.useState(false);
-  const [captured, setCaptured] = React.useState(null);
-  const [pokeballType] = React.useState(getPokeball());
+  const [show, setShow] = useState(true);
+  const [throwBall, setThrowBall] = useState(false);
+  const [showCapturing, setShowCapturing] = useState(false);
+  const [captured, setCaptured] = useState(null);
+  const [pokeballType] = useState(getPokeball());
+  const [captureEventTry] = useState(getCatchRate(POKEBALL_CATCH_RATE[pokeballType]));
+  const [currentTry, setCurrentTry] = useState(1);
 
   React.useEffect(() => {
     if (throwBall) {
@@ -34,15 +35,18 @@ const CaptureModal = ({pokemon, onLeave}) => {
   React.useEffect(() => {
     if (showCapturing) {
       const capturing = setTimeout(() => {
-        setCaptured(getCaptureResult(pokeballType));
-        setShowCapturing(false);
-        setThrowBall(false);
+        if (showCapturing) {
+          setCaptured(currentTry === captureEventTry);
+          setCurrentTry(currentTry + 1);
+          setShowCapturing(false);
+          setThrowBall(false);
+        }
       }, CAPTURE_WAIT_TIME * 1000);
       return () => {
         clearTimeout(capturing);
       };
     }
-  }, [showCapturing, pokeballType]);
+  }, [showCapturing, pokeballType, currentTry, captureEventTry]);
 
   React.useEffect(() => {
     if (captured === false) {
