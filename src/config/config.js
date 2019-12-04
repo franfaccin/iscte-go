@@ -1,4 +1,4 @@
-const MAX_WIDTH = 768;
+const MAX_WIDTH = 770;
 const MAX_HEIGHT = 650;
 
 const THROW_BALL_DURATION = .5; // seconds
