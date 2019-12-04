@@ -1,4 +1,4 @@
-import RARITY from './pokemon-rarity';
+import RARITY from '../model/pokemon-rarity';
 
 export const pokemonListComplete = [
   {
@@ -12,6 +12,18 @@ export const pokemonListComplete = [
     key: "ivysaur",
     number: 2,
     rarity: RARITY.UNCOMMON
+  },
+  {
+    name: "Venusaur",
+    key: "venusaur",
+    number: 3,
+    rarity: RARITY.RARE
+  },
+  {
+    name: "Mew",
+    key: "mew",
+    number: 151,
+    rarity: RARITY.LEGENDARY
   },
 ]
 

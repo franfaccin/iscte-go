@@ -1,42 +1,21 @@
-import { pokemonList } from '../config/pokemon-list.js';
+import { pokemonListComplete } from '../config/pokemon-list.js';
 import { Pokemon } from '../model/Pokemon.js';
-import { MAX_HEIGHT, MAX_WIDTH } from '../config/config.js';
-import RARITY from '../model/pokemon-rarity.js';
-
-const TOTAL_POKEMONS = pokemonList.length;
-const CHANCE_SHINY = 0.10;
+import { getPositionX } from './continua-01-position-x.js';
+import { getPositionY } from './continua-01-position-y.js';
+import { getVAIsShiny } from './04-shiny.js';
+import { getPokemonRarity } from './01-histograma-pokemon-rarity.js';
 
 export const getNewPokemon = () => {
-  const number = getPokemonNumber();
-  const x = getVAXposition();
-  const y = getVAYposition();
+  const pokemonData = getPokemonData();
+  const x = getPositionX();
+  const y = getPositionY();
   const isShiny = getVAIsShiny();
-  return new Pokemon({number, x, y, isShiny});
+  return new Pokemon({pokemonData, x, y, isShiny});
 }
 
-const getPokemonNumber = () => {
-  return parseInt(Math.random() * TOTAL_POKEMONS);
-}
-
-const getVAIsShiny = () => {
-  return Math.random() < CHANCE_SHINY;
-}
-
-const getVAXposition = () => {
-  return parseInt(Math.random() * MAX_WIDTH);
-}
-
-const getVAYposition = () => {
-  return parseInt(Math.random() * MAX_HEIGHT);
-}
-
-const getPokemonRarity = () => {
-  const x = Math.random();
-  if (x <= 0.6)
-    return RARITY.COMMON;
-  if (x > 0.6 && x <= 0.85)
-    return RARITY.UNCOMMON;
-  if (x > 0.85 && x <= 0.95)
-    return RARITY.RARE;
-  return RARITY.LEGENDARY;
+const getPokemonData = () => {
+  const rarity = getPokemonRarity();
+  const filteredPokemons = pokemonListComplete.filter(pokemon => pokemon.rarity === rarity);
+  const randomPokemonIndex = parseInt(Math.random() * filteredPokemons.length);
+  return filteredPokemons[randomPokemonIndex];
 }

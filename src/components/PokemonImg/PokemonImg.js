@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import { pokemonList } from '../../config/pokemon-list.js';
 import { Pokemon } from '../../model/Pokemon.js';
-
-const getPokemonName = num => pokemonList[num];
 
 const getPokemonSprite = (name, isShiny) => {
   const type = isShiny ? 'shiny' : 'normal';
@@ -12,8 +9,8 @@ const getPokemonSprite = (name, isShiny) => {
 }
 
 const PokemonImg = ({pokemon}) => {
-  const { number, isShiny } = pokemon;
-  const [name] = React.useState(getPokemonName(number));
+  const { isShiny, key } = pokemon;
+  const [pokeKey] = React.useState(key);
 
   return (
     <img 
@@ -21,8 +18,8 @@ const PokemonImg = ({pokemon}) => {
         width: 100%;
         height: 100%;
       `}
-      src={getPokemonSprite(name, isShiny)}
-      alt={`pokemon ${name} mini`}
+      src={getPokemonSprite(pokeKey, isShiny)}
+      alt={`pokemon ${pokeKey} mini`}
     />
   )
 }
