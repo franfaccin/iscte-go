@@ -8,30 +8,32 @@ import { getNewPokemon } from '../../VAs/newPokemon';
 
 const getPokeminTile = (pokemon, index, handlePokemonClick) => {
   return <PokemonTile key={pokemon.number + '-' + index} pokemon={pokemon} onClick={handlePokemonClick} />;
-}
+};
 
 const getInitPokemons = () => {
   return new Array(5).fill('').map(getNewPokemon);
-}
+};
 
-const City = ({onCaptured}) => {
-  const [capture, setCapture] = React.useState(null);
+const City = ({ onCaptured }) => {
+  const [pokemonToCapture, setPokemonToCapture] = React.useState(null);
   const [pokemonsInCity, setPokemonsInCity] = React.useState(getInitPokemons());
 
   const handlePokemonClick = pokemon => {
-    setCapture(pokemon);
-  }
+    setPokemonToCapture(pokemon);
+  };
 
-  const handleCaptureEnd = captured => {
-    if (captured) {
+  const handleCaptureEnd = (captured, runAway) => {
+    if (captured || runAway) {
       const pokemons = [...pokemonsInCity];
-      const pokemonCapturedIndex = pokemons.findIndex(p => p === capture);
-      pokemons[pokemonCapturedIndex] = getNewPokemon();
+      const pokemonIndex = pokemons.findIndex(p => p === pokemonToCapture);
+      pokemons[pokemonIndex] = getNewPokemon();
       setPokemonsInCity(pokemons);
-      onCaptured(capture);
     }
-    setCapture(null);
-  }
+    if (captured) {
+      onCaptured(pokemonToCapture);
+    }
+    setPokemonToCapture(null);
+  };
 
   return (
     <div>
@@ -41,19 +43,13 @@ const City = ({onCaptured}) => {
           height: ${MAX_HEIGHT}px;
           background-image: url(${cityBg});
           position: relative;
-        border: 5px solid #ccc;
-        `}
-      >
+          border: 5px solid #ccc;
+        `}>
         {pokemonsInCity.map((p, i) => getPokeminTile(p, i, handlePokemonClick))}
       </div>
-      { capture && (
-        <CaptureModal
-          pokemon={capture}
-          onLeave={handleCaptureEnd}
-        />
-      )}
+      {pokemonToCapture && <CaptureModal pokemon={pokemonToCapture} onLeave={handleCaptureEnd} />}
     </div>
-  )
-}
+  );
+};
 
 export default City;
