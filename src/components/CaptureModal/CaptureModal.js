@@ -18,6 +18,7 @@ import {
 import { getPokeball } from '../../VAs/02-histograma-pokeball';
 import { getCatchRate } from '../../VAs/03-catch-rate';
 import { getRunAwayByTime } from '../../VAs/continua-04-run-away-by-time';
+import { getRunAwayRatePerBallThrow } from '../../VAs/continua-02-run-away-per-balls-throw';
 
 const CaptureModal = ({ pokemon, onLeave }) => {
   const [show, setShow] = useState(true);
@@ -27,6 +28,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
   const [pokeballType] = useState(getPokeball());
   const [captureEventTry] = useState(getCatchRate(POKEBALL_CATCH_RATE[pokeballType]));
   const [currentTry, setCurrentTry] = useState(1);
+  const [triesToRunAway] = useState(parseInt(getRunAwayRatePerBallThrow())); // Time in seconds
   const [timeToRunAway] = useState(getRunAwayByTime()); // Time in seconds
   const [runAway, setRunAway] = useState(false);
 
@@ -58,6 +60,12 @@ const CaptureModal = ({ pokemon, onLeave }) => {
   }, [showCapturing, pokeballType, currentTry, captureEventTry]);
 
   useEffect(() => {
+    if (currentTry - 1 === triesToRunAway) {
+      setRunAway(true);
+    }
+  }, [currentTry, triesToRunAway]);
+
+  useEffect(() => {
     if (captured === false) {
       const resetCaptured = setTimeout(() => {
         setCaptured(null);
@@ -67,13 +75,6 @@ const CaptureModal = ({ pokemon, onLeave }) => {
       };
     }
   }, [captured]);
-
-  const runAwayCallback = useCallback(() => {
-    console.log('run away');
-    if (!captured && (currentTry !== captureEventTry || !showCapturing)) {
-      setRunAway(true);
-    }
-  }, [captureEventTry, captured, currentTry, showCapturing]);
 
   const handleHide = useCallback(
     e => {
@@ -88,8 +89,12 @@ const CaptureModal = ({ pokemon, onLeave }) => {
   }, [handleHide]);
 
   useEffect(() => {
-    console.log('timeToRunAway', timeToRunAway);
-    const runAwayTimer = setTimeout(runAwayCallback, timeToRunAway * 1000);
+    const runAwayTimer = setTimeout(() => {
+      console.log('run away');
+      if (!captured && (currentTry !== captureEventTry || !showCapturing)) {
+        setRunAway(true);
+      }
+    }, timeToRunAway * 1000);
     return () => clearTimeout(runAwayTimer);
   }, []);
 
