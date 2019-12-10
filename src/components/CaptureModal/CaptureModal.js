@@ -90,7 +90,6 @@ const CaptureModal = ({ pokemon, onLeave }) => {
 
   useEffect(() => {
     const runAwayTimer = setTimeout(() => {
-      console.log('run away');
       if (!captured && (currentTry !== captureEventTry || !showCapturing)) {
         setRunAway(true);
       }
@@ -124,6 +123,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
         <div
           className={css`
             height: 75vh;
+            max-height: 600px;
             display: flex;
             flex-direction: column;
             justify-content: center;
