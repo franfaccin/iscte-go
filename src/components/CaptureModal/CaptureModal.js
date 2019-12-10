@@ -47,7 +47,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
     if (showCapturing) {
       const capturing = setTimeout(() => {
         if (showCapturing) {
-          setCaptured(currentTry === captureEventTry);
+          setCaptured(currentTry === captureEventTry && !runAway);
           setCurrentTry(currentTry + 1);
           setShowCapturing(false);
           setThrowBall(false);
@@ -57,7 +57,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
         clearTimeout(capturing);
       };
     }
-  }, [showCapturing, pokeballType, currentTry, captureEventTry]);
+  }, [showCapturing, pokeballType, currentTry, captureEventTry, runAway]);
 
   useEffect(() => {
     if (currentTry - 1 === triesToRunAway) {
@@ -88,25 +88,29 @@ const CaptureModal = ({ pokemon, onLeave }) => {
     handleHide();
   }, [handleHide]);
 
+  const runAwayPokemon = useCallback(() => {
+    if (!captured && (currentTry !== captureEventTry || !showCapturing)) {
+      setRunAway(true);
+    }
+  }, [captured, captureEventTry, currentTry, showCapturing]);
+
   useEffect(() => {
-    const runAwayTimer = setTimeout(() => {
-      if (!captured && (currentTry !== captureEventTry || !showCapturing)) {
-        setRunAway(true);
-      }
-    }, timeToRunAway * 1000);
+    const runAwayTimer = setTimeout(runAwayPokemon, timeToRunAway * 1000);
     return () => clearTimeout(runAwayTimer);
   }, []);
 
   useEffect(() => {
-    if (runAway && !showCapturing) {
+    if (runAway && !showCapturing && !captured) {
       const closeModalTimeout = setTimeout(closeModalCallback, 750);
       return () => clearTimeout(closeModalTimeout);
     }
-  }, [runAway, showCapturing, closeModalCallback]);
+  }, [runAway, showCapturing, closeModalCallback, captured]);
 
   const handleThrowBall = e => {
-    setCaptured(null);
-    setThrowBall(true);
+    if (!runAway) {
+      setCaptured(null);
+      setThrowBall(true);
+    }
   };
 
   return (
@@ -129,7 +133,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
             justify-content: center;
             align-items: center;
           `}>
-          {runAway && (
+          {runAway && !showCapturing && !captured && (
             <img
               className={css`
                 max-width: 250px;
@@ -162,6 +166,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
                   animation: capture 2s 1 ease-in reverse;
                 `}
               ${runAway &&
+                !showCapturing &&
                 css`
                   animation: runAway 0.2s 1 ease-out normal forwards;
                 `}

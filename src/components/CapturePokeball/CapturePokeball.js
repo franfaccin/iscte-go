@@ -7,8 +7,8 @@ import ultra from '../../assets/img/pokeball-ultra.png';
 import master from '../../assets/img/pokeball-master.png';
 import { THROW_BALL_DURATION, FAIL_MESSAGE_DURATION, POKEBALL_TYPE } from '../../config/config';
 
-const getPokeballImg = (type) => {
-  switch(type) {
+const getPokeballImg = type => {
+  switch (type) {
     case POKEBALL_TYPE.MASTER:
       return master;
     case POKEBALL_TYPE.ULTRA:
@@ -19,9 +19,9 @@ const getPokeballImg = (type) => {
     default:
       return poke;
   }
-}
+};
 
-const CapturePokeball = ({throwBall, captured, onThrowBall, showCapturing, type}) => {
+const CapturePokeball = ({ throwBall, captured, onThrowBall, showCapturing, type }) => {
   const pokeball = getPokeballImg(type);
 
   return (
@@ -32,26 +32,34 @@ const CapturePokeball = ({throwBall, captured, onThrowBall, showCapturing, type}
         width: 300px;
         height: 300px;
 
-        ${!throwBall && !captured && (css`
-          cursor: pointer;
-          animation: bounce .5s infinite alternate;
-        `)}
+        ${!throwBall &&
+          !captured &&
+          css`
+            cursor: pointer;
+            animation: bounce 0.5s infinite alternate;
+          `}
 
-        ${throwBall && !showCapturing && (css`
-          animation: throw ${THROW_BALL_DURATION}s 1 ease-out normal forwards;
-        `)}
+        ${throwBall &&
+          !showCapturing &&
+          css`
+            animation: throw ${THROW_BALL_DURATION}s 1 ease-out normal forwards;
+          `}
 
-        ${captured === false && (css`
-          animation: throw ${FAIL_MESSAGE_DURATION}s 1 ease-out reverse;
-        `)}
+        ${captured === false &&
+          css`
+            animation: throw ${FAIL_MESSAGE_DURATION}s 1 ease-out reverse;
+          `}
 
-        ${throwBall && showCapturing && (css`
-          animation: shake 1s ease-in-out infinite alternate;
-        `)}
+        ${throwBall &&
+          showCapturing &&
+          css`
+            animation: shake 1s ease-in-out infinite alternate;
+          `}
 
-        ${captured && (css`
-          transform: translate(0, -80%) scale(0.5); 
-        `)}
+        ${captured &&
+          css`
+            transform: translate(0, -80%) scale(0.5);
+          `}
 
         @keyframes bounce {
           0% { transform: translateY(0); }
@@ -69,28 +77,28 @@ const CapturePokeball = ({throwBall, captured, onThrowBall, showCapturing, type}
           100% { transform: translate(0, -80%) rotate(0) scale(0.5); }
         }
       `}
-      onClick={onThrowBall}
-    >
-      <img 
+      onClick={onThrowBall}>
+      <img
         className={css`
           width: 100%;
           height: 100%;
-        `} 
-        src={pokeball} alt='pokeball'
+        `}
+        src={pokeball}
+        alt="pokeball"
       />
     </div>
-  )
-}
+  );
+};
 
 CapturePokeball.prototype = {
   throwBall: PropTypes.bool,
   captured: PropTypes.captured,
-  onThrowBall: PropTypes.func.isRequired
-}
+  onThrowBall: PropTypes.func.isRequired,
+};
 
 CapturePokeball.defaultTypes = {
   throwBall: false,
-  captured: null
-}
+  captured: null,
+};
 
 export default CapturePokeball;
