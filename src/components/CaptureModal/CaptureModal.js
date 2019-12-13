@@ -19,6 +19,7 @@ import { getPokeball } from '../../VAs/02-histograma-pokeball';
 import { getCatchRate } from '../../VAs/03-catch-rate';
 import { getRunAwayByTime } from '../../VAs/continua-04-run-away-by-time';
 import { getRunAwayRatePerBallThrow } from '../../VAs/continua-02-run-away-per-balls-throw';
+import StatsForNerds from '../StatsForNerds/StatsForNerds';
 
 const CaptureModal = ({ pokemon, onLeave }) => {
   const [show, setShow] = useState(true);
@@ -113,41 +114,56 @@ const CaptureModal = ({ pokemon, onLeave }) => {
     }
   };
 
-  return (
-    <Modal show={show} onHide={handleHide}>
-      <Modal.Body
-        className={css`
-          background: url(${captureBg}) no-repeat center center fixed;
-          background-size: cover;
-          position: relative;
-          overflow: hidden;
-          border: 5px solid #6c757d;
-          border-radius: 5px;
-        `}>
-        <div
-          className={css`
-            height: 75vh;
-            max-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          `}>
-          {runAway && !showCapturing && !captured && (
-            <img
-              className={css`
-                max-width: 250px;
-                max-height: 250px;
-                transform: translateY(50%);
-              `}
-              src={smokeAnimation}
-              alt="smoke animation"
-            />
-          )}
+  const statsForNerds = (
+    <StatsForNerds
+      items={[
+        { key: 'Pokemon', value: pokemon.name },
+        { key: 'Rarity', value: pokemon.rarity },
+        { key: 'Pokeball Type', value: pokeballType },
+        { key: 'Capture Event', value: captureEventTry },
+        { key: 'Run Away Event', value: triesToRunAway },
+        { key: 'Time to Run Away', value: `${timeToRunAway.toFixed(2)}s` },
+      ]}
+    />
+  );
 
-          {!captured && (
-            <div
-              className={css`
+  return (
+    <>
+      <Modal show={show} onHide={handleHide}>
+        {show && statsForNerds}
+        <Modal.Body
+          className={css`
+            background: url(${captureBg}) no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            border: 5px solid #6c757d;
+            border-radius: 5px;
+          `}>
+          <div
+            className={css`
+              height: 75vh;
+              max-height: 600px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            `}>
+            {runAway && !showCapturing && !captured && (
+              <img
+                className={css`
+                  max-width: 250px;
+                  max-height: 250px;
+                  transform: translateY(50%);
+                `}
+                src={smokeAnimation}
+                alt="smoke animation"
+              />
+            )}
+
+            {!captured && (
+              <div
+                className={css`
               max-width: 250px;
               max-height: 500px;
               min-width: 200px;
@@ -179,26 +195,27 @@ const CaptureModal = ({ pokemon, onLeave }) => {
                 100% { transform: translate(-200%, 0); }
               }
             `}>
-              <PokemonImg pokemon={pokemon} />
-            </div>
-          )}
-          {captured !== null && (
-            <CaptureResultDisplay captured={captured} FAIL_MESSAGE_DURATION={FAIL_MESSAGE_DURATION} />
-          )}
-          <CapturePokeball
-            throwBall={throwBall}
-            captured={captured}
-            onThrowBall={handleThrowBall}
-            showCapturing={showCapturing}
-            type={pokeballType}
-          />
-        </div>
-      </Modal.Body>
-    </Modal>
+                <PokemonImg pokemon={pokemon} />
+              </div>
+            )}
+            {captured !== null && (
+              <CaptureResultDisplay captured={captured} FAIL_MESSAGE_DURATION={FAIL_MESSAGE_DURATION} />
+            )}
+            <CapturePokeball
+              throwBall={throwBall}
+              captured={captured}
+              onThrowBall={handleThrowBall}
+              showCapturing={showCapturing}
+              type={pokeballType}
+            />
+          </div>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 
-CaptureModal.prototype = {
+CaptureModal.propTypes = {
   pokemon: PropTypes.shape(Pokemon).isRequired,
   onLeave: PropTypes.func.isRequired,
 };
