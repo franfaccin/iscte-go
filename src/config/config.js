@@ -1,23 +1,23 @@
 const MAX_WIDTH = 770;
 const MAX_HEIGHT = 650;
 
-const THROW_BALL_DURATION = .5; // seconds
-const CAPTURE_WAIT_TIME = .5;   // seconds
+const THROW_BALL_DURATION = 0.5; // seconds
+const CAPTURE_WAIT_TIME = 2; // seconds
 const FAIL_MESSAGE_DURATION = 3; // seconds
 
 const POKEBALL_TYPE = {
   POKE: 'POKE',
   GREAT: 'GREAT',
   ULTRA: 'ULTRA',
-  MASTER: 'MASTER'
-}
+  MASTER: 'MASTER',
+};
 
 const POKEBALL_CATCH_RATE = {
   POKE: 0.3,
   GREAT: 0.5,
   ULTRA: 0.8,
-  MASTER: 0.9
-}
+  MASTER: 0.9,
+};
 
 export {
   MAX_WIDTH,
@@ -26,5 +26,5 @@ export {
   CAPTURE_WAIT_TIME,
   FAIL_MESSAGE_DURATION,
   POKEBALL_TYPE,
-  POKEBALL_CATCH_RATE
-}
+  POKEBALL_CATCH_RATE,
+};

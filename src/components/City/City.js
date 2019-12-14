@@ -6,6 +6,7 @@ import cityBg from '../../assets/img/city-bg.png';
 import { MAX_WIDTH, MAX_HEIGHT } from '../../config/config';
 import { getNewPokemon } from '../../VAs/newPokemon';
 import { getTimeNextPokemon } from '../../VAs/continua-03-new-pokemon-by-time';
+import StatsForNerds from '../StatsForNerds/StatsForNerds';
 
 const getPokeminTile = (pokemon, index, handlePokemonClick) => {
   return <PokemonTile key={pokemon.number + '-' + index} pokemon={pokemon} onClick={handlePokemonClick} />;
@@ -58,6 +59,10 @@ const City = ({ onCaptured }) => {
     [onCaptured, pokemonsInCity, pokemonToCapture]
   );
 
+  const statsForNerds = (
+    <StatsForNerds items={[{ key: 'Time to Next Pokemon', value: `${timeToNextPokemon.toFixed(2)}s` }]} />
+  );
+
   return (
     <div>
       <div
@@ -71,6 +76,7 @@ const City = ({ onCaptured }) => {
         {pokemonsInCity.map((p, i) => getPokeminTile(p, i, handlePokemonClick))}
       </div>
       {pokemonToCapture && <CaptureModal pokemon={pokemonToCapture} onLeave={handleCaptureEnd} />}
+      {statsForNerds}
     </div>
   );
 };

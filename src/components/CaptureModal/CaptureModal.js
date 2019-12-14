@@ -139,11 +139,12 @@ const CaptureModal = ({ pokemon, onLeave }) => {
             overflow: hidden;
             border: 5px solid #6c757d;
             border-radius: 5px;
+            height: 650px;
+            width: 500px;
           `}>
           <div
             className={css`
-              height: 75vh;
-              max-height: 600px;
+              height: 100%;
               display: flex;
               flex-direction: column;
               justify-content: center;
@@ -179,7 +180,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
                 `}
               ${captured === false &&
                 css`
-                  animation: capture 2s 1 ease-in reverse;
+                  animation: release 0.5s ease-in normal forwards;
                 `}
               ${runAway &&
                 !showCapturing &&
@@ -189,6 +190,10 @@ const CaptureModal = ({ pokemon, onLeave }) => {
               @keyframes capture {
                 0% { transform: scale(1); opacity: 1; }
                 100% { transform: scale(.2); opacity: 0; }
+              }
+              @keyframes release {
+                0% { transform: scale(.2); opacity: 0; }
+                100% { transform: scale(1); opacity: 1; }
               }
               @keyframes runAway {
                 0% { transform: translate(0, 0); }
