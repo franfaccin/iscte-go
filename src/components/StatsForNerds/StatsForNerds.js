@@ -21,10 +21,10 @@ const StatsForNerds = ({ items }) => {
           margin: 0;
         }
       `}>
-      <Button variant="dark" onClick={() => setShow(!show)}>
+      <Button variant="dark" size="sm" onClick={() => setShow(!show)}>
         Stats For Nerds
       </Button>
-      <Toast variant="dark" show={show} className={css``}>
+      <Toast variant="dark" show={show}>
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
@@ -34,7 +34,7 @@ const StatsForNerds = ({ items }) => {
           </thead>
           <tbody>
             {items.map(({ key, value }) => (
-              <tr>
+              <tr key={key}>
                 <td>{key}</td>
                 <td>{value}</td>
               </tr>
@@ -50,7 +50,7 @@ StatsForNerds.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     })
   ).isRequired,
 };

@@ -108,7 +108,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
   }, [runAway, showCapturing, closeModalCallback, captured]);
 
   const handleThrowBall = e => {
-    if (!runAway) {
+    if (!runAway && !captured) {
       setCaptured(null);
       setThrowBall(true);
     }
@@ -119,6 +119,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
       items={[
         { key: 'Pokemon', value: pokemon.name },
         { key: 'Rarity', value: pokemon.rarity },
+        { key: 'Shiny', value: `${pokemon.isShiny}` },
         { key: 'Pokeball Type', value: pokeballType },
         { key: 'Capture Event', value: captureEventTry },
         { key: 'Run Away Event', value: triesToRunAway },
@@ -130,10 +131,9 @@ const CaptureModal = ({ pokemon, onLeave }) => {
   return (
     <>
       <Modal show={show} onHide={handleHide}>
-        {show && statsForNerds}
         <Modal.Body
           className={css`
-            background: url(${captureBg}) no-repeat center center fixed;
+            background: url(${captureBg}) no-repeat center center;
             background-size: cover;
             position: relative;
             overflow: hidden;
@@ -210,6 +210,7 @@ const CaptureModal = ({ pokemon, onLeave }) => {
             />
           </div>
         </Modal.Body>
+        {show && statsForNerds}
       </Modal>
     </>
   );
