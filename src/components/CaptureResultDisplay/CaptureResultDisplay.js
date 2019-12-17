@@ -31,7 +31,7 @@ const CaptureResultDisplay = ({captured, FAIL_MESSAGE_DURATION}) => {
       <h3>
         {captured
           ? <>Congratulations! <br/> Pokemon captured! </>
-          : 'Pokemon escaped pokeball!'
+          : 'Pokemon escaped the pokeball!'
         }
       </h3>
     </div>
