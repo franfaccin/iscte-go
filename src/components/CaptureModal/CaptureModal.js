@@ -15,7 +15,7 @@ import {
   THROW_BALL_DURATION,
   POKEBALL_CATCH_RATE,
 } from '../../config/config';
-import { getPokeball } from '../../VAs/02-histograma-pokeball';
+import { getPokeball } from '../../VAs/02-pokeball';
 import { getCatchRate } from '../../VAs/03-catch-rate';
 import { getRunAwayByTime } from '../../VAs/continua-04-run-away-by-time';
 import { getRunAwayRatePerBallThrow } from '../../VAs/continua-02-run-away-per-balls-throw';
