@@ -7,7 +7,7 @@ import { Pokemon } from '../../model/Pokemon';
 
 export const CapturePokemon = ({ pokemon, showCapturing, captured, runAway }) => {
   const { height } = pokemon;
-  const maxHeight = Math.min(height * 1.2, 500);
+  const maxHeight = Math.min(height * 1.2, 250);
   const imgHeight = Math.max(maxHeight, 80);
   return (
     <div

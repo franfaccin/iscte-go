@@ -5,10 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import PokemonsCaptured from './components/PokemonsCaptured/PokemonsCaptured';
 import logo from './assets/img/iscte-go_logo.png';
-import { getNewPokemon } from './VAs/newPokemon';
-const poke = new Array(20).fill(getNewPokemon());
+
 function App() {
-  const [pokemons, setPokemons] = React.useState(poke);
+  const [pokemons, setPokemons] = React.useState([]);
   return (
     <div
       className={css`
