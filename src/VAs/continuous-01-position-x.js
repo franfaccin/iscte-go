@@ -1,14 +1,15 @@
-export const getTimeNextPokemon = () => {
-  var u = Math.random();
-  var xinit = -25 * Math.log(u);
-  return xinit > 50 ? 50 : xinit;
+export const getPositionX = () => {
+  var u1 = Math.random();
+  var u2 = Math.random();
+  var xinit = 385 + 100 * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  return xinit < 25 ? 25 : xinit > 745 ? 745 : xinit;
 };
 
-const getHistogram = () => {
+export const getHistogramPositionX = () => {
   var x = {};
   var total = 1000000;
   for (var i = 0; i < total; i++) {
-    var xfinal = parseFloat(getTimeNextPokemon()).toFixed(5);
+    var xfinal = parseFloat(getPositionX()).toFixed(5);
     x[xfinal] = x[xfinal] ? x[xfinal] + 1 : 1;
   }
 

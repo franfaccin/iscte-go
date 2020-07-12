@@ -5,7 +5,7 @@ import CaptureModal from '../CaptureModal/CaptureModal';
 import cityBg from '../../assets/img/city-bg.png';
 import { MAX_WIDTH, MAX_HEIGHT } from '../../config/config';
 import { getNewPokemon } from '../../VAs/newPokemon';
-import { getTimeNextPokemon } from '../../VAs/continua-03-new-pokemon-by-time';
+import { getTimeNextPokemon } from '../../VAs/continuous-03-new-pokemon-by-time';
 import StatsForNerds from '../StatsForNerds/StatsForNerds';
 
 const getPokeminTile = (pokemon, index, handlePokemonClick) => {

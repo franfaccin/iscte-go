@@ -1,15 +1,15 @@
-export const getRunAwayRatePerBallThrow = () => {
+export const getPositionY = () => {
   var u1 = Math.random();
   var u2 = Math.random();
-  var xinit = 4 + 1 * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-  return xinit < 1 ? 1 : xinit > 10 ? 10 : xinit;
+  var xinit = 325 + 100 * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  return xinit < 25 ? 25 : xinit > 625 ? 625 : xinit;
 };
 
-const getHistogram = () => {
+export const getHistogramPositionY = () => {
   var x = {};
   var total = 1000000;
   for (var i = 0; i < total; i++) {
-    var xfinal = parseFloat(getRunAwayRatePerBallThrow()).toFixed(5);
+    var xfinal = parseFloat(getPositionY()).toFixed(5);
     x[xfinal] = x[xfinal] ? x[xfinal] + 1 : 1;
   }
 

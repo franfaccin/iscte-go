@@ -1,7 +1,7 @@
 import { pokemonListComplete } from '../config/pokemon-list.js';
 import { Pokemon } from '../model/Pokemon.js';
-import { getPositionX } from './continua-01-position-x.js';
-import { getPositionY } from './continua-01-position-y.js';
+import { getPositionX } from './continuous-01-position-x.js';
+import { getPositionY } from './continuous-01-position-y.js';
 import { getVAIsShiny } from './04-shiny.js';
 import { getPokemonRarity } from './01-pokemon-rarity.js';
 

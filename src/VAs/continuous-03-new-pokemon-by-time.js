@@ -1,12 +1,14 @@
-export const getVAIsShiny = () => {
-  return Math.random() <= 0.3;
+export const getTimeNextPokemon = () => {
+  var u = Math.random();
+  var xinit = -25 * Math.log(u);
+  return xinit > 50 ? 50 : xinit;
 };
 
-export const getHistogramShiny = () => {
+export const getHistogramTimeNextPokemon = () => {
   var x = {};
   var total = 1000000;
   for (var i = 0; i < total; i++) {
-    var xfinal = getVAIsShiny();
+    var xfinal = parseFloat(getTimeNextPokemon()).toFixed(5);
     x[xfinal] = x[xfinal] ? x[xfinal] + 1 : 1;
   }
 

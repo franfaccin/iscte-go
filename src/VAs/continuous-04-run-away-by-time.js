@@ -1,12 +1,13 @@
-export const getVAIsShiny = () => {
-  return Math.random() <= 0.3;
+export const getRunAwayByTime = () => {
+  var u = Math.random();
+  return 10 + 50 * Math.sqrt(u);
 };
 
-export const getHistogramShiny = () => {
+export const getHistogramRunAwayByTime = () => {
   var x = {};
   var total = 1000000;
   for (var i = 0; i < total; i++) {
-    var xfinal = getVAIsShiny();
+    var xfinal = parseFloat(getRunAwayByTime()).toFixed(5);
     x[xfinal] = x[xfinal] ? x[xfinal] + 1 : 1;
   }
 

@@ -15,8 +15,8 @@ import {
 } from '../../config/config';
 import { getPokeball } from '../../VAs/02-pokeball';
 import { getCatchRate } from '../../VAs/03-catch-rate';
-import { getRunAwayByTime } from '../../VAs/continua-04-run-away-by-time';
-import { getRunAwayRatePerBallThrow } from '../../VAs/continua-02-run-away-per-balls-throw';
+import { getRunAwayByTime } from '../../VAs/continuous-04-run-away-by-time';
+import { getRunAwayRatePerBallThrow } from '../../VAs/continuous-02-run-away-per-balls-throw';
 import StatsForNerds from '../StatsForNerds/StatsForNerds';
 import { CapturePokemon } from './CapturePokemon';
 
