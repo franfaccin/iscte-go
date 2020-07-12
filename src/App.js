@@ -5,32 +5,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import PokemonsCaptured from './components/PokemonsCaptured/PokemonsCaptured';
 import logo from './assets/img/iscte-go_logo.png';
-
+import { getNewPokemon } from './VAs/newPokemon';
+const poke = new Array(20).fill(getNewPokemon());
 function App() {
-  const [pokemons, setPokemons] = React.useState([]);
+  const [pokemons, setPokemons] = React.useState(poke);
   return (
-    <div className={css`
-      display: block;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      background: #000;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-      flex-wrap: wrap;
-    `}>
-      <div className={css`
-        width: 100%;
-        display: flex;
-        justify-content: center;
+    <div
+      className={css`
+        display: block;
+        min-width: 100vw;
+        min-height: 100vh;
+        overflow: auto;
+        background: #000;
       `}>
-        <div>
-          <img src={logo} alt="logo"/>
-        </div>
+      <div
+        className={css`
+          width: 100%;
+          > img {
+            margin: auto;
+            display: block;
+          }
+        `}>
+        <img src={logo} alt="logo" />
       </div>
-      <City onCaptured={p => setPokemons([...pokemons, p])} />
-      <PokemonsCaptured pokemons={pokemons} />
+      <div
+        className={css`
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          min-width: 850px;
+        `}>
+        <City onCaptured={p => setPokemons([...pokemons, p])} />
+        <PokemonsCaptured pokemons={pokemons} />
+      </div>
     </div>
   );
 }
