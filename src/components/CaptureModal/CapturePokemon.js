@@ -60,5 +60,5 @@ CapturePokemon.protoTypes = {
   pokemon: PropTypes.shape(Pokemon).isRequired,
   showCapturing: PropTypes.bool,
   captured: PropTypes.bool,
-  showCapturing: PropTypes.bool,
+  runAway: PropTypes.bool,
 };
