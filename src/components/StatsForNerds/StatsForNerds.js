@@ -24,7 +24,15 @@ const StatsForNerds = ({ items }) => {
       <Button variant="dark" size="sm" onClick={() => setShow(!show)}>
         Stats For Nerds
       </Button>
-      <Toast variant="dark" show={show}>
+      <Toast
+        variant="dark"
+        show={show}
+        className={css`
+          ${!show &&
+            css`
+              display: none;
+            `}
+        `}>
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
