@@ -200,11 +200,21 @@ const CaptureModal = ({ pokemon, onLeave }) => {
                 100% { transform: translate(-200%, 0); }
               }
             `}>
-                <PokemonImg pokemon={pokemon} />
+                <PokemonImg
+                  className={css`
+                    width: 100%;
+                    height: 100%;
+                  `}
+                  pokemon={pokemon}
+                />
               </div>
             )}
             {captured !== null && (
-              <CaptureResultDisplay captured={captured} FAIL_MESSAGE_DURATION={FAIL_MESSAGE_DURATION} />
+              <CaptureResultDisplay
+                pokemon={pokemon}
+                captured={captured}
+                FAIL_MESSAGE_DURATION={FAIL_MESSAGE_DURATION}
+              />
             )}
             <CapturePokeball
               throwBall={throwBall}

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
 import { Pokemon } from '../../model/Pokemon.js';
 
 const getPokemonSprite = (name, isShiny) => {
@@ -13,17 +12,7 @@ const PokemonImg = ({ pokemon, className }) => {
   const [pokeKey] = React.useState(key);
 
   return (
-    <img
-      className={cx(
-        css`
-          width: 100%;
-          height: 100%;
-        `,
-        className
-      )}
-      src={getPokemonSprite(pokeKey, isShiny)}
-      alt={`pokemon ${pokeKey} mini`}
-    />
+    <img className={className} src={getPokemonSprite(pokeKey, isShiny)} alt={`pokemon ${pokeKey} mini`} />
   );
 };
 
