@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import Modal from 'react-bootstrap/Modal';
 import CaptureResultDisplay from '../CaptureResultDisplay';
-import PokemonImg from '../PokemonImg';
 import { Pokemon } from '../../model/Pokemon';
 import captureBg from '../../assets/img/capture-bg.png';
-import shinyBackground from '../../assets/img/sparkle.gif';
 import smokeAnimation from '../../assets/img/run-away-smoke-02.gif';
 import CapturePokeball from '../CapturePokeball/CapturePokeball';
 import {
@@ -20,6 +18,7 @@ import { getCatchRate } from '../../VAs/03-catch-rate';
 import { getRunAwayByTime } from '../../VAs/continua-04-run-away-by-time';
 import { getRunAwayRatePerBallThrow } from '../../VAs/continua-02-run-away-per-balls-throw';
 import StatsForNerds from '../StatsForNerds/StatsForNerds';
+import { CapturePokemon } from './CapturePokemon';
 
 const CaptureModal = ({ pokemon, onLeave }) => {
   const [show, setShow] = useState(true);
@@ -163,51 +162,12 @@ const CaptureModal = ({ pokemon, onLeave }) => {
             )}
 
             {!captured && (
-              <div
-                className={css`
-              max-width: 250px;
-              max-height: 500px;
-              min-width: 200px;
-              padding: 30px;
-              ${pokemon.isShiny &&
-                css`
-                  background: url(${shinyBackground}) no-repeat center center;
-                  background-size: cover;
-                `}
-              ${showCapturing &&
-                css`
-                  animation: capture 0.5s 1 ease-out normal forwards;
-                `}
-              ${captured === false &&
-                css`
-                  animation: release 0.5s ease-in normal forwards;
-                `}
-              ${runAway &&
-                !showCapturing &&
-                css`
-                  animation: runAway 0.2s 1 ease-out normal forwards;
-                `}
-              @keyframes capture {
-                0% { transform: scale(1); opacity: 1; }
-                100% { transform: scale(.2); opacity: 0; }
-              }
-              @keyframes release {
-                0% { transform: scale(.2); opacity: 0; }
-                100% { transform: scale(1); opacity: 1; }
-              }
-              @keyframes runAway {
-                0% { transform: translate(0, 0); }
-                100% { transform: translate(-200%, 0); }
-              }
-            `}>
-                <PokemonImg
-                  className={css`
-                    width: 100%;
-                    height: 100%;
-                  `}
-                  pokemon={pokemon}
-                />
-              </div>
+              <CapturePokemon
+                pokemon={pokemon}
+                showCapturing={showCapturing}
+                captured={captured}
+                runAway={runAway}
+              />
             )}
             {captured !== null && (
               <CaptureResultDisplay
