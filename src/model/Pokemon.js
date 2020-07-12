@@ -3,6 +3,7 @@ export function Pokemon({ pokemonData, x, y, isShiny = false }) {
   this.name = pokemonData.name;
   this.key = pokemonData.key;
   this.rarity = pokemonData.rarity;
+  this.height = pokemonData.height;
   this.x = x;
   this.y = y;
   this.isShiny = isShiny;
