@@ -23,25 +23,18 @@ const PokemonsCaptured = ({ pokemons }) => {
           `}
       `}>
       {pokemons.map((p, i) => (
-        <div
+        <PokemonImg
           key={p.number + '-' + i}
+          pokemon={p}
           className={css`
             max-height: 50px;
             max-width: 50px;
-            height: 50px;
-            width: 50px;
+            padding: 3px;
             display: flex;
             justify-content: center;
             align-items: center;
-          `}>
-          <div
-            className={css`
-              max-height: 50px;
-              max-width: 50px;
-            `}>
-            <PokemonImg pokemon={p} />
-          </div>
-        </div>
+          `}
+        />
       ))}
     </div>
   );
