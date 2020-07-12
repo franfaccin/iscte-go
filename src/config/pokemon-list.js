@@ -159,8 +159,3 @@ export const pokemonListComplete = [
   { name: 'Mewtwo', key: 'mewtwo', number: 150, rarity: RARITY.LEGENDARY, height: 200 },
   { name: 'Mew', key: 'mew', number: 151, rarity: RARITY.LEGENDARY, height: 40 },
 ];
-
-const maior = pokemonListComplete.reduce((m, p) => (p.height > m ? p.height : m), 0);
-const menor = pokemonListComplete.reduce((m, p) => (p.height < m ? p.height : m), 880);
-
-console.log('maior:', maior, 'menor:', menor);
